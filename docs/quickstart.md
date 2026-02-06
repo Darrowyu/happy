@@ -57,10 +57,11 @@ yarn install
 
 #### A. 开发模式（在 CLI 目录运行）
 
-进入 CLI 目录直接运行：
+进入 CLI 目录，先构建项目，然后运行：
 
 ```bash
 cd packages/happy-cli
+npm run build        # 或 yarn build
 npx tsx src/index.ts
 ```
 
@@ -73,6 +74,7 @@ Press Ctrl+C to stop
 ```
 
 **访问地址：**
+
 - **本机访问**: http://localhost:1874
 - **局域网访问**: http://192.168.x.x:1874 (IP 地址会自动检测)
 
@@ -80,16 +82,56 @@ Press Ctrl+C to stop
 
 创建全局链接，以后可以在任意目录使用 `happy` 命令：
 
-```bash
-# 创建全局链接（只需执行一次）
-cd packages/happy-cli
-yarn link
+**步骤 1：先构建项目（必须）**
 
-# 现在可以在任意目录执行
-happy
+```bash
+cd packages/happy-cli
+npm run build        # 或 yarn build
+```
+
+> ⚠️ **重要**：必须先构建项目，确保 `dist/` 目录存在
+
+**步骤 2：解除旧链接（如果存在）**
+
+```bash
+yarn unlink
+yarn link
+```
+
+> ⚠️ 如果出现 `There's already a package called "happy-coder" registered`，先执行 `yarn unlink` 解除旧链接，再重新 `yarn link`
+
+**步骤 3：添加到系统 PATH（Windows 必须）**
+
+`yarn link` 创建的命令不在系统 PATH 中，需要手动添加：
+
+```bash
+# 查看 yarn bin 目录
+yarn global bin
+```
+
+**将以下路径添加到系统 PATH：**
+
+```
+%LOCALAPPDATA%\Yarn\config\global\node_modules\.bin
+```
+
+**添加方法：**
+
+1. Win + R → 输入 `sysdm.cpl` → 回车
+2. 高级 → 环境变量
+3. 系统变量 → 找到 `Path` → 编辑 → 新建
+4. 粘贴：`%LOCALAPPDATA%\Yarn\config\global\node_modules\.bin`
+5. 确定 → **重启终端**（必须）
+
+**步骤 4：验证安装**
+
+```bash
+# 重启终端后执行
+happy --version
 ```
 
 > **提示**：全局模式需要先安装 `opencode-ai`：
+> 
 > ```bash
 > npm install -g opencode-ai
 > ```
@@ -196,6 +238,43 @@ ipconfig
 
 # macOS/Linux
 ifconfig
+```
+
+### Q: Windows 上 `yarn link` 后 `happy` 命令找不到？
+
+A: 这是 Windows 的常见问题，`yarn link` 创建的命令不在系统 PATH 中。解决步骤：
+
+1. **查看 yarn bin 目录：**
+   
+   ```bash
+   yarn global bin
+   ```
+
+2. **添加到系统 PATH：**
+   
+   - Win + R → `sysdm.cpl` → 高级 → 环境变量
+   - 系统变量 → Path → 编辑 → 新建
+   - 添加：`%LOCALAPPDATA%\Yarn\config\global\node_modules\.bin`
+
+3. **重启终端**（必须关闭所有终端窗口重新打开）
+
+4. **验证：**
+   
+   ```bash
+   where happy
+   happy --version
+   ```
+
+### Q: `yarn link` 提示包已注册？
+
+A: 说明之前有链接指向其他目录：
+
+```bash
+# 先解除旧链接
+yarn unlink
+
+# 重新创建链接
+yarn link
 ```
 
 ---

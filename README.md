@@ -34,6 +34,7 @@ git clone https://github.com/Darrowyu/happy.git
 cd happy
 yarn install
 cd packages/happy-cli
+npm run build        # 或 yarn build
 npx tsx src/index.ts
 ```
 
