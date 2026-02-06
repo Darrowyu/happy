@@ -11,6 +11,29 @@ Happy CLI 支持本地模式运行，无需连接 Happy Server，直接启动 Op
 - Node.js >= 20
 - Yarn >= 1.22 (本项目使用 Yarn workspaces)
 
+### 安装 Yarn
+
+如果你还没有安装 Yarn，可以通过以下方式安装：
+
+**方式一：使用 Corepack（推荐，Node.js 16.10+ 内置）**
+
+```bash
+# 启用 corepack（只需执行一次）
+corepack enable
+
+# 验证安装
+yarn --version
+```
+
+**方式二：通过 npm 全局安装**
+
+```bash
+npm install -g yarn
+
+# 验证安装
+yarn --version
+```
+
 ## 快速开始
 
 ### 方式一：从源码运行（推荐开发者）
