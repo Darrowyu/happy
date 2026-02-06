@@ -29,14 +29,6 @@ Step 1: Download App
 Step 2: Install CLI on your computer
 </h3>
 
-**Option A: From npm (Recommended for users)**
-
-```bash
-npm install -g happy-coder
-```
-
-**Option B: From source (Recommended for developers)**
-
 ```bash
 git clone https://github.com/Darrowyu/happy.git
 cd happy
@@ -46,17 +38,16 @@ npx tsx src/index.ts
 ```
 
 <h3 align="center">
-Step 3: Start using `happy` instead of `claude` or `codex`
+Step 3: Start OpenCode in local mode
 </h3>
 
 ```bash
-# Instead of: claude
-# Use: happy
+# Start OpenCode local mode
 happy
 
-# Instead of: codex
-# Use: happy codex
-happy codex
+# Access via browser:
+# - Local: http://localhost:1874
+# - LAN:   http://192.168.x.xxx:1874
 ```
 
 <div align="center"><img src="/.github/mascot.png" width="200" title="Happy Coder" alt="Happy Coder"/></div>

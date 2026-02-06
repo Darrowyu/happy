@@ -78,31 +78,13 @@ Press Ctrl+C to stop
 - **本机访问**: http://localhost:1874
 - **局域网访问**: http://192.168.x.x:1874 (IP 地址会自动检测)
 
----
-
-### 方式二：通过 npm 全局安装（当前暂不支持 OpenCode 本地模式）
+<!-- 
+### 方式二：通过 npm 全局安装（暂不可用）
 
 ⚠️ **注意：npm 包版本尚未更新，暂时无法使用 OpenCode 本地模式。**
 
-如需使用 OpenCode 本地模式，请使用**方式一：从源码运行**。
-
----
-
-如需使用传统模式（Claude Code），可按以下步骤：
-
-#### 1. 安装 Happy CLI
-
-```bash
-npm install -g happy-coder
-```
-
-#### 2. 启动服务
-
-```bash
-happy
-```
-
----
+如需使用 OpenCode 本地模式，请使用上方「从源码运行」的方式。
+-->
 
 ## 源码开发进阶
 
