@@ -51,18 +51,41 @@ cd happy
 yarn install
 ```
 
-### 3. 使用方式
+### 3. 构建项目
 
-安装完成后，有两种使用方式：
-
-#### A. 开发模式（在 CLI 目录运行）
-
-进入 CLI 目录，先构建项目，然后运行：
+进入 CLI 目录并构建：
 
 ```bash
 cd packages/happy-cli
 npm run build        # 或 yarn build
-npx tsx src/index.ts
+```
+
+### 4. 创建全局链接
+
+使用 `npm link` 创建全局命令链接：
+
+```bash
+# 如果之前 link 过，先解除旧链接
+npm unlink -g happy-coder
+
+# 创建新的全局链接
+npm link
+```
+
+> **说明**：使用 `npm link` 而非 `yarn link`，因为 npm link 会自动处理 Windows PATH 配置。
+
+### 5. 验证安装
+
+```bash
+happy --version
+```
+
+应该输出：`happy version: 0.15.0`
+
+### 6. 启动服务
+
+```bash
+happy
 ```
 
 启动成功后，控制台会显示：
@@ -78,74 +101,17 @@ Press Ctrl+C to stop
 - **本机访问**: http://localhost:1874
 - **局域网访问**: http://192.168.x.x:1874 (IP 地址会自动检测)
 
-#### B. 全局模式（任意目录使用）
+---
 
-创建全局链接，以后可以在任意目录使用 `happy` 命令：
+## 进阶使用
 
-**步骤 1：先构建项目（必须）**
+### 开发模式（无需构建）
 
-```bash
-cd packages/happy-cli
-npm run build        # 或 yarn build
-```
-
-> ⚠️ **重要**：必须先构建项目，确保 `dist/` 目录存在
-
-**步骤 2：解除旧链接（如果存在）**
-
-```bash
-yarn unlink
-yarn link
-```
-
-> ⚠️ 如果出现 `There's already a package called "happy-coder" registered`，先执行 `yarn unlink` 解除旧链接，再重新 `yarn link`
-
-**步骤 3：添加到系统 PATH（Windows 必须）**
-
-`yarn link` 创建的命令不在系统 PATH 中，需要手动添加：
-
-```bash
-# 查看 yarn bin 目录
-yarn global bin
-```
-
-**将以下路径添加到系统 PATH：**
-
-```
-%LOCALAPPDATA%\Yarn\config\global\node_modules\.bin
-```
-
-**添加方法：**
-
-1. Win + R → 输入 `sysdm.cpl` → 回车
-2. 高级 → 环境变量
-3. 系统变量 → 找到 `Path` → 编辑 → 新建
-4. 粘贴：`%LOCALAPPDATA%\Yarn\config\global\node_modules\.bin`
-5. 确定 → **重启终端**（必须）
-
-**步骤 4：验证安装**
-
-```bash
-# 重启终端后执行
-happy --version
-```
-
-> **提示**：全局模式需要先安装 `opencode-ai`：
-> 
-> ```bash
-> npm install -g opencode-ai
-> ```
-
-## 源码开发进阶
-
-### 构建后运行
-
-如需构建生产版本，在 `packages/happy-cli` 目录执行：
+如果你正在修改源码，可以使用 tsx 直接运行 TypeScript：
 
 ```bash
 cd packages/happy-cli
-npm run build
-node bin/happy.mjs
+npx tsx src/index.ts
 ```
 
 ---
@@ -210,6 +176,34 @@ hostname: '127.0.0.1', // 仅本机访问
 
 ## 常见问题
 
+### Q: 执行 `happy` 提示"不是内部或外部命令"？
+
+A: 请确认已执行 `npm link` 创建全局链接。如果仍有问题，检查 npm 全局 bin 目录是否在 PATH 中：
+
+```bash
+# 查看 npm 全局 bin 目录
+npm bin -g
+
+# 确认该目录在系统 PATH 环境变量中
+echo $PATH
+```
+
+### Q: `npm link` 提示权限错误？
+
+A: Windows 上请以管理员身份运行终端，然后重新执行：
+
+```bash
+npm link
+```
+
+### Q: 如何解除全局链接？
+
+A: 
+
+```bash
+npm unlink -g happy-coder
+```
+
 ### Q: 端口被占用怎么办？
 
 A: 修改端口号后重新启动，或杀死占用该端口的进程：
@@ -238,43 +232,6 @@ ipconfig
 
 # macOS/Linux
 ifconfig
-```
-
-### Q: Windows 上 `yarn link` 后 `happy` 命令找不到？
-
-A: 这是 Windows 的常见问题，`yarn link` 创建的命令不在系统 PATH 中。解决步骤：
-
-1. **查看 yarn bin 目录：**
-   
-   ```bash
-   yarn global bin
-   ```
-
-2. **添加到系统 PATH：**
-   
-   - Win + R → `sysdm.cpl` → 高级 → 环境变量
-   - 系统变量 → Path → 编辑 → 新建
-   - 添加：`%LOCALAPPDATA%\Yarn\config\global\node_modules\.bin`
-
-3. **重启终端**（必须关闭所有终端窗口重新打开）
-
-4. **验证：**
-   
-   ```bash
-   where happy
-   happy --version
-   ```
-
-### Q: `yarn link` 提示包已注册？
-
-A: 说明之前有链接指向其他目录：
-
-```bash
-# 先解除旧链接
-yarn unlink
-
-# 重新创建链接
-yarn link
 ```
 
 ---
