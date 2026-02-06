@@ -9,35 +9,38 @@ Happy CLI 支持本地模式运行，无需连接 Happy Server，直接启动 Op
 ## 环境要求
 
 - Node.js >= 20
-- OpenCode CLI (`npm install -g opencode`)
+- Yarn >= 1.22 (本项目使用 Yarn workspaces)
 
 ## 快速开始
 
-### 1. 安装依赖
+### 方式一：从源码运行（推荐开发者）
+
+#### 1. 克隆仓库
 
 ```bash
-cd packages/happy-cli
-npm install
+git clone https://github.com/Darrowyu/happy.git
+cd happy
 ```
 
-### 2. 启动服务
+#### 2. 安装依赖
 
-#### 方式一：使用 tsx 直接运行（开发模式）
+在仓库**根目录**执行：
+
+```bash
+yarn install
+```
+
+#### 3. 进入 CLI 目录
 
 ```bash
 cd packages/happy-cli
+```
+
+#### 4. 启动服务
+
+```bash
 npx tsx src/index.ts
 ```
-
-#### 方式二：构建后运行
-
-```bash
-cd packages/happy-cli
-npm run build
-node bin/happy.mjs
-```
-
-### 3. 访问服务
 
 启动成功后，控制台会显示：
 
@@ -47,8 +50,41 @@ OpenCode server running at http://localhost:1874
 Press Ctrl+C to stop
 ```
 
+**访问地址：**
 - **本机访问**: http://localhost:1874
-- **局域网访问**: http://192.168.0.162:1874 (IP 地址会自动检测)
+- **局域网访问**: http://192.168.x.x:1874 (IP 地址会自动检测)
+
+---
+
+### 方式二：通过 npm 全局安装（推荐普通用户）
+
+#### 1. 安装 CLI
+
+```bash
+npm install -g happy-coder
+```
+
+#### 2. 启动服务
+
+```bash
+happy
+```
+
+---
+
+## 源码开发进阶
+
+### 构建后运行
+
+如需构建生产版本，在 `packages/happy-cli` 目录执行：
+
+```bash
+cd packages/happy-cli
+npm run build
+node bin/happy.mjs
+```
+
+---
 
 ## 命令说明
 
@@ -81,13 +117,15 @@ happy opencode --local -m claude-3.5-sonnet
 happy --help
 ```
 
+---
+
 ## 配置说明
 
 ### 固定端口
 
 默认端口固定为 **1874**，如需修改，编辑文件：
 
-`packages/happy-cli/src/opencode/runOpencode.ts`
+**文件路径**: `packages/happy-cli/src/opencode/runOpencode.ts`
 
 ```typescript
 port: 1874, // 修改此处的端口号
@@ -97,11 +135,13 @@ port: 1874, // 修改此处的端口号
 
 默认绑定到 `0.0.0.0`（所有网络接口），支持局域网访问。如需限制仅本机访问，修改为 `127.0.0.1`：
 
-`packages/happy-cli/src/opencode/runOpencode.ts`
+**文件路径**: `packages/happy-cli/src/opencode/runOpencode.ts`
 
 ```typescript
 hostname: '127.0.0.1', // 仅本机访问
 ```
+
+---
 
 ## 常见问题
 
@@ -135,6 +175,8 @@ ipconfig
 ifconfig
 ```
 
+---
+
 ## 技术细节
 
 - **本地模式特点**:
@@ -149,11 +191,15 @@ ifconfig
   3. 自动检测并显示局域网 IP 地址
   4. 等待用户中断（Ctrl+C）
 
+---
+
 ## 相关文件
 
-- `packages/happy-cli/src/opencode/runOpencode.ts` - 本地模式主逻辑
-- `packages/happy-cli/src/opencode/opencodeLocal.ts` - OpenCode 进程管理
-- `packages/happy-cli/src/index.ts` - CLI 入口和命令解析
+| 文件路径 | 说明 |
+|---------|------|
+| `packages/happy-cli/src/opencode/runOpencode.ts` | 本地模式主逻辑 |
+| `packages/happy-cli/src/opencode/opencodeLocal.ts` | OpenCode 进程管理 |
+| `packages/happy-cli/src/index.ts` | CLI 入口和命令解析 |
 
 ---
 

@@ -29,8 +29,20 @@ Step 1: Download App
 Step 2: Install CLI on your computer
 </h3>
 
+**Option A: From npm (Recommended for users)**
+
 ```bash
 npm install -g happy-coder
+```
+
+**Option B: From source (Recommended for developers)**
+
+```bash
+git clone https://github.com/Darrowyu/happy.git
+cd happy
+yarn install
+cd packages/happy-cli
+npx tsx src/index.ts
 ```
 
 <h3 align="center">
@@ -38,17 +50,13 @@ Step 3: Start using `happy` instead of `claude` or `codex`
 </h3>
 
 ```bash
-
 # Instead of: claude
 # Use: happy
-
 happy
 
 # Instead of: codex
 # Use: happy codex
-
 happy codex
-
 ```
 
 <div align="center"><img src="/.github/mascot.png" width="200" title="Happy Coder" alt="Happy Coder"/></div>
@@ -67,12 +75,20 @@ On your computer, run `happy` instead of `claude` or `happy codex` instead of `c
 
 ## 🚀 OpenCode 本地模式（新功能）
 
-无需连接 Happy Server，直接在本地运行 OpenCode，支持局域网访问：
+无需连接 Happy Server，直接在本地运行 OpenCode，支持局域网访问。
 
+**从源码运行：**
 ```bash
-# 默认启动 OpenCode 本地模式
-happy
+git clone https://github.com/Darrowyu/happy.git
+cd happy/packages/happy-cli
+npx tsx src/index.ts
+# 局域网访问 http://192.168.0.xxx:1874
+```
 
+**从 npm 运行：**
+```bash
+npm install -g happy-coder
+happy
 # 局域网访问 http://192.168.0.xxx:1874
 ```
 
