@@ -9,7 +9,9 @@
   "bugs": "https://github.com/slopus/happy-cli/issues",
   "repository": "slopus/happy-cli",
   "bin": {
+    "happy": "./bin/happy.mjs",
     "happyoc": "./bin/happy.mjs",
+    "happy-mcp": "./bin/happy-mcp.mjs",
     "happyoc-mcp": "./bin/happy-mcp.mjs"
   },
   "main": "./dist/index.cjs",

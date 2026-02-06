@@ -325,7 +325,7 @@ import { execFileSync } from 'node:child_process'
       process.exit(1)
     }
     return;
-  } else if (subcommand === 'opencode') {
+  } else if (subcommand === 'opencode' || subcommand === 'oc') {
     // Handle opencode command
     try {
       const { runOpencode } = await import('@/opencode/runOpencode');
@@ -333,7 +333,8 @@ import { execFileSync } from 'node:child_process'
       // Parse arguments
       let startedBy: 'daemon' | 'terminal' | undefined = undefined;
       let model: string | undefined = undefined;
-      let local = false;
+      // 'oc' subcommand defaults to local mode, 'opencode' requires --local flag
+      let local = subcommand === 'oc';
 
       for (let i = 1; i < args.length; i++) {
         if (args[i] === '--started-by') {
@@ -604,7 +605,8 @@ ${chalk.bold('To clean up runaway processes:')} Use ${chalk.cyan('happy doctor c
 ${chalk.bold('happy')} - Claude Code On the Go
 
 ${chalk.bold('Usage:')}
-  happy [options]         Start Claude with mobile control
+  happy [options]         Start OpenCode in local mode
+  happy oc                Start OpenCode in local mode (shortcut)
   happy auth              Manage authentication
   happy codex             Start Codex mode
   happy gemini            Start Gemini mode (ACP)
@@ -617,7 +619,8 @@ ${chalk.bold('Usage:')}
   happy doctor            System diagnostics & troubleshooting
 
 ${chalk.bold('Examples:')}
-  happy                    Start session
+  happy                    Start OpenCode local mode
+  happy oc                 Start OpenCode local mode (shortcut)
   happy --yolo             Start with bypassing permissions
                             happy sugar for --dangerously-skip-permissions
   happy --chrome           Enable Chrome browser access for this session
@@ -652,37 +655,14 @@ ${chalk.bold.cyan('Claude Code Options (from `claude --help`):')}
     // Show version
     if (showVersion) {
       console.log(`happy version: ${packageJson.version}`)
-      // Don't exit - continue to pass --version to Claude Code
+      process.exit(0)
     }
 
-    // Normal flow - auth and machine setup
-    const {
-      credentials
-    } = await authAndSetupMachineIfNeeded();
-
-    // Always auto-start daemon for simplicity
-    logger.debug('Ensuring Happy background service is running & matches our version...');
-
-    if (!(await isDaemonRunningCurrentlyInstalledHappyVersion())) {
-      logger.debug('Starting Happy background service...');
-
-      // Use the built binary to spawn daemon
-      const daemonProcess = spawnHappyCLI(['daemon', 'start-sync'], {
-        detached: true,
-        stdio: 'ignore',
-        env: process.env
-      })
-      daemonProcess.unref();
-
-      // Give daemon a moment to write PID & port file
-      await new Promise(resolve => setTimeout(resolve, 200));
-    }
-
-    // Start OpenCode in local mode by default
+    // Default: Start OpenCode in local mode (no auth required)
     console.log(chalk.blue('Starting OpenCode in local mode...'));
     try {
       const { runOpencode } = await import('@/opencode/runOpencode');
-      await runOpencode(credentials, { local: true });
+      await runOpencode({ token: '', encryption: { type: 'legacy', secret: new Uint8Array() } }, { local: true });
     } catch (error) {
       console.error(chalk.red('Error:'), error instanceof Error ? error.message : 'Unknown error')
       if (process.env.DEBUG) {
