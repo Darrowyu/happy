@@ -92,7 +92,9 @@ Or visit: https://opencode.ai/docs/installation
       cwd: workingDirectory,
       port: 1874, // 固定端口为 1874
       hostname: '0.0.0.0', // 绑定到所有网络接口，支持局域网访问
-      env: options.model ? { OPENCODE_MODEL: options.model } : undefined,
+      env: {
+        ...(options.model ? { OPENCODE_MODEL: options.model } : {}),
+      },
       args: options.opencodeArgs,
     });
   } catch (error) {
