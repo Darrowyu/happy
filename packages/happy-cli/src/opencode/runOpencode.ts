@@ -43,19 +43,30 @@ export interface OpencodeStartOptions {
 }
 
 /**
- * Get local IP address
+ * Get all local IP addresses
  */
-function getLocalIpAddress(): string {
+function getAllLocalIpAddresses(): { address: string; interface: string }[] {
   const nets = networkInterfaces();
+  const addresses: { address: string; interface: string }[] = [];
+  
   for (const name of Object.keys(nets)) {
     for (const net of nets[name] || []) {
       // Skip internal and non-IPv4 addresses
       if (!net.internal && net.family === 'IPv4') {
-        return net.address;
+        addresses.push({ address: net.address, interface: name });
       }
     }
   }
-  return '127.0.0.1'; // Fallback to localhost
+  
+  return addresses;
+}
+
+/**
+ * Get primary local IP address (first non-internal IPv4)
+ */
+function getLocalIpAddress(): string {
+  const addresses = getAllLocalIpAddresses();
+  return addresses.length > 0 ? addresses[0].address : '127.0.0.1';
 }
 
 /**
@@ -102,8 +113,23 @@ Or visit: https://opencode.ai/docs/installation
     process.exit(1);
   }
 
+  // Get all available network interfaces
+  const allAddresses = getAllLocalIpAddresses();
+  
   console.log(`OpenCode server running at http://localhost:${opencodeServer.port}`);
-  console.log(`局域网访问: http://${localIp}:${opencodeServer.port}`);
+  console.log('');
+  console.log('可用局域网地址 (Accessible via):');
+  console.log('--------------------------------');
+  
+  if (allAddresses.length === 0) {
+    console.log(`  http://${localIp}:${opencodeServer.port} (fallback)`);
+  } else {
+    allAddresses.forEach(({ address, interface: iface }) => {
+      console.log(`  http://${address}:${opencodeServer.port} (${iface})`);
+    });
+  }
+  
+  console.log('');
   console.log('Press Ctrl+C to stop');
 
   // Keep process alive until user interrupts
