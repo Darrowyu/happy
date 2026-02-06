@@ -93,8 +93,10 @@ npm install -g happy-coder
 Happy CLI 依赖 OpenCode CLI 运行，需要单独安装：
 
 ```bash
-npm install -g opencode
+npm install -g opencode-ai
 ```
+
+> **注意**：安装后命令为 `opencode`，但包名为 `opencode-ai`。
 
 #### 3. 启动服务
 

@@ -75,7 +75,9 @@ async function runLocalMode(options: OpencodeStartOptions): Promise<void> {
 OpenCode is not installed or not in PATH.
 
 To install OpenCode:
-  npm install -g opencode
+  npm install -g opencode-ai
+
+Note: The command is 'opencode' but the package name is 'opencode-ai'.
 
 Or visit: https://opencode.ai/docs/installation
 `);
@@ -142,7 +144,9 @@ export async function runOpencode(
 OpenCode is not installed or not in PATH.
 
 To install OpenCode:
-  npm install -g opencode
+  npm install -g opencode-ai
+
+Note: The command is 'opencode' but the package name is 'opencode-ai'.
 
 Or visit: https://opencode.ai/docs/installation
 `);
