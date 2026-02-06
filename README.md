@@ -34,7 +34,7 @@ git clone https://github.com/Darrowyu/happy.git
 cd happy
 yarn install
 cd packages/happy-cli
-npm run build        # 或 yarn build
+npm run build
 npx tsx src/index.ts
 ```
 
@@ -73,10 +73,11 @@ On your computer, run `happy` instead of `claude` or `happy codex` instead of `c
 
 ```bash
 git clone https://github.com/Darrowyu/happy.git
-cd happy
-yarn install
-cd packages/happy-cli
-npx tsx src/index.ts
+cd happy/packages/happy-cli
+npm install
+npm run build
+npm link
+happy oc
 # 局域网访问 http://192.168.x.xxx:1874
 ```
 
