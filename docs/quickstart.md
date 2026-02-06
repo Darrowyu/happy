@@ -9,30 +9,6 @@ Happy CLI 支持本地模式运行，无需连接 Happy Server，直接启动 Op
 ## 环境要求
 
 - Node.js >= 20
-- Yarn >= 1.22 (本项目使用 Yarn workspaces)
-
-### 安装 Yarn
-
-如果你还没有安装 Yarn，可以通过以下方式安装：
-
-**方式一：使用 Corepack（推荐，Node.js 16.10+ 内置）**
-
-```bash
-# 启用 corepack（只需执行一次）
-corepack enable
-
-# 验证安装
-yarn --version
-```
-
-**方式二：通过 npm 全局安装**
-
-```bash
-npm install -g yarn
-
-# 验证安装
-yarn --version
-```
 
 ## 快速开始
 
@@ -45,54 +21,46 @@ cd happy
 
 ### 2. 安装依赖
 
-在仓库**根目录**执行：
+进入 CLI 目录并安装依赖：
 
 ```bash
-yarn install
+cd packages/happy-cli
+npm install
 ```
 
 ### 3. 构建项目
 
-进入 CLI 目录并构建：
+构建项目：
 
 ```bash
-cd packages/happy-cli
-npm run build        # 或 yarn build
+npm run build
 ```
 
-### 4. 创建全局链接
+### 4. 运行
+
+#### 方式一：创建全局链接（推荐）
 
 使用 `npm link` 创建全局命令链接：
 
 ```bash
-# 如果之前 link 过，先解除旧链接
+# 如果之前安装过旧版本，先解除旧链接
 npm unlink -g happy-coder
 
 # 创建新的全局链接
 npm link
-```
 
-> **说明**：使用 `npm link` 而非 `yarn link`，因为 npm link 会自动处理 Windows PATH 配置。
+# 验证安装
+happy --version
 
-### 5. 验证安装
-
-```bash
-happyoc --version
-```
-
-应该输出：`happy version: 0.15.0`
-
-### 6. 启动服务
-
-```bash
-happyoc
+# 启动服务
+happy oc
 ```
 
 启动成功后，控制台会显示：
 
 ```
 OpenCode server running at http://localhost:1874
-局域网访问: http://192.168.0.162:1874
+局域网访问: http://192.168.0.xxx:1874
 Press Ctrl+C to stop
 ```
 
@@ -100,6 +68,16 @@ Press Ctrl+C to stop
 
 - **本机访问**: http://localhost:1874
 - **局域网访问**: http://192.168.x.x:1874 (IP 地址会自动检测)
+
+> **说明**：Windows 上如果提示权限错误，请以管理员身份运行终端。
+
+#### 方式二：直接运行（可选）
+
+如果你不想创建全局链接，可以直接运行：
+
+```bash
+node ./bin/happy.mjs
+```
 
 ---
 
@@ -118,34 +96,34 @@ npx tsx src/index.ts
 
 ## 命令说明
 
-### 默认启动（OpenCode 本地模式）
+### 启动 OpenCode 本地模式（推荐）
 
 ```bash
-happyoc
+happy oc
 ```
 
 等效于：
 
 ```bash
-happyoc opencode --local
+happy opencode --local
 ```
 
 ### 显式启动 OpenCode 本地模式
 
 ```bash
-happyoc opencode --local
+happy opencode --local
 ```
 
 ### 指定模型
 
 ```bash
-happyoc opencode --local -m claude-4.5-sonnet
+happy oc -m claude-4.5-sonnet
 ```
 
 ### 查看帮助
 
 ```bash
-happyoc --help
+happy --help
 ```
 
 ---
