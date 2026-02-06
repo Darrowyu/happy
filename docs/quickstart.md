@@ -82,13 +82,21 @@ Press Ctrl+C to stop
 
 ### 方式二：通过 npm 全局安装（推荐普通用户）
 
-#### 1. 安装 CLI
+#### 1. 安装 Happy CLI
 
 ```bash
 npm install -g happy-coder
 ```
 
-#### 2. 启动服务
+#### 2. 安装 OpenCode CLI
+
+Happy CLI 依赖 OpenCode CLI 运行，需要单独安装：
+
+```bash
+npm install -g opencode
+```
+
+#### 3. 启动服务
 
 ```bash
 happy
