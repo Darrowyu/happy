@@ -65,6 +65,25 @@ On your computer, run `happy` instead of `claude` or `happy codex` instead of `c
 - 🔐 **End-to-end encrypted** - Your code never leaves your devices unencrypted
 - 🛠️ **Open source** - Audit the code yourself. No telemetry, no tracking
 
+## 🚀 OpenCode 本地模式（新功能）
+
+无需连接 Happy Server，直接在本地运行 OpenCode，支持局域网访问：
+
+```bash
+# 默认启动 OpenCode 本地模式
+happy
+
+# 局域网访问 http://192.168.0.xxx:1874
+```
+
+**特性：**
+- ✅ 无需登录认证
+- ✅ 无需 Happy Server 连接
+- ✅ 固定端口 1874
+- ✅ 支持局域网内多设备访问
+
+[查看完整文档 →](./docs/quickstart.md)
+
 ## 📦 Project Components
 
 - **[Happy App](https://github.com/slopus/happy/tree/main/packages/happy-app)** - Web UI + mobile client (Expo)
