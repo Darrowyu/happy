@@ -44,7 +44,7 @@ Step 3: Start OpenCode in local mode
 
 ```bash
 # Start OpenCode local mode
-happy
+happyoc
 
 # Access via browser:
 # - Local: http://localhost:1874

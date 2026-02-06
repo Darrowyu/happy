@@ -77,7 +77,7 @@ npm link
 ### 5. 验证安装
 
 ```bash
-happy --version
+happyoc --version
 ```
 
 应该输出：`happy version: 0.15.0`
@@ -85,7 +85,7 @@ happy --version
 ### 6. 启动服务
 
 ```bash
-happy
+happyoc
 ```
 
 启动成功后，控制台会显示：
@@ -121,31 +121,31 @@ npx tsx src/index.ts
 ### 默认启动（OpenCode 本地模式）
 
 ```bash
-happy
+happyoc
 ```
 
 等效于：
 
 ```bash
-happy opencode --local
+happyoc opencode --local
 ```
 
 ### 显式启动 OpenCode 本地模式
 
 ```bash
-happy opencode --local
+happyoc opencode --local
 ```
 
 ### 指定模型
 
 ```bash
-happy opencode --local -m claude-4.5-sonnet
+happyoc opencode --local -m claude-4.5-sonnet
 ```
 
 ### 查看帮助
 
 ```bash
-happy --help
+happyoc --help
 ```
 
 ---
@@ -176,7 +176,7 @@ hostname: '127.0.0.1', // 仅本机访问
 
 ## 常见问题
 
-### Q: 执行 `happy` 提示"不是内部或外部命令"？
+### Q: 执行 `happyoc` 提示"不是内部或外部命令"？
 
 A: 请确认已执行 `npm link` 创建全局链接。如果仍有问题，检查 npm 全局 bin 目录是否在 PATH 中：
 
