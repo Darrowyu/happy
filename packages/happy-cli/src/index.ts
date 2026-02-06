@@ -325,6 +325,47 @@ import { execFileSync } from 'node:child_process'
       process.exit(1)
     }
     return;
+  } else if (subcommand === 'opencode') {
+    // Handle opencode command
+    try {
+      const { runOpencode } = await import('@/opencode/runOpencode');
+      
+      // Parse arguments
+      let startedBy: 'daemon' | 'terminal' | undefined = undefined;
+      let model: string | undefined = undefined;
+      
+      for (let i = 1; i < args.length; i++) {
+        if (args[i] === '--started-by') {
+          startedBy = args[++i] as 'daemon' | 'terminal';
+        } else if (args[i] === '--model' || args[i] === '-m') {
+          model = args[++i];
+        }
+      }
+      
+      const { credentials } = await authAndSetupMachineIfNeeded();
+      
+      // Auto-start daemon
+      logger.debug('Ensuring Happy background service is running...');
+      if (!(await isDaemonRunningCurrentlyInstalledHappyVersion())) {
+        logger.debug('Starting Happy background service...');
+        const daemonProcess = spawnHappyCLI(['daemon', 'start-sync'], {
+          detached: true,
+          stdio: 'ignore',
+          env: process.env,
+        });
+        daemonProcess.unref();
+        await new Promise((resolve) => setTimeout(resolve, 200));
+      }
+      
+      await runOpencode(credentials, { startedBy, model });
+    } catch (error) {
+      console.error(chalk.red('Error:'), error instanceof Error ? error.message : 'Unknown error');
+      if (process.env.DEBUG) {
+        console.error(error);
+      }
+      process.exit(1);
+    }
+    return;
   } else if (subcommand === 'logout') {
     // Keep for backward compatibility - redirect to auth logout
     console.log(chalk.yellow('Note: "happy logout" is deprecated. Use "happy auth logout" instead.\n'));
@@ -559,6 +600,7 @@ ${chalk.bold('Usage:')}
   happy auth              Manage authentication
   happy codex             Start Codex mode
   happy gemini            Start Gemini mode (ACP)
+  happy opencode          Start OpenCode mode
   happy connect           Connect AI vendor API keys
   happy notify            Send push notification
   happy daemon            Manage background service that allows

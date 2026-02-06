@@ -45,6 +45,16 @@
         "types": "./dist/codex/happyMcpStdioBridge.d.mts",
         "default": "./dist/codex/happyMcpStdioBridge.mjs"
       }
+    },
+    "./opencode/runOpencode": {
+      "require": {
+        "types": "./dist/opencode/runOpencode.d.cts",
+        "default": "./dist/opencode/runOpencode.cjs"
+      },
+      "import": {
+        "types": "./dist/opencode/runOpencode.d.mts",
+        "default": "./dist/opencode/runOpencode.mjs"
+      }
     }
   },
   "files": [
