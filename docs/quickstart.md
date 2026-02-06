@@ -36,16 +36,14 @@ yarn --version
 
 ## 快速开始
 
-### 方式一：从源码运行（推荐开发者）
-
-#### 1. 克隆仓库
+### 1. 克隆仓库
 
 ```bash
 git clone https://github.com/Darrowyu/happy.git
 cd happy
 ```
 
-#### 2. 安装依赖
+### 2. 安装依赖
 
 在仓库**根目录**执行：
 
@@ -53,15 +51,16 @@ cd happy
 yarn install
 ```
 
-#### 3. 进入 CLI 目录
+### 3. 使用方式
+
+安装完成后，有两种使用方式：
+
+#### A. 开发模式（在 CLI 目录运行）
+
+进入 CLI 目录直接运行：
 
 ```bash
 cd packages/happy-cli
-```
-
-#### 4. 启动服务
-
-```bash
 npx tsx src/index.ts
 ```
 
@@ -74,17 +73,26 @@ Press Ctrl+C to stop
 ```
 
 **访问地址：**
-
 - **本机访问**: http://localhost:1874
 - **局域网访问**: http://192.168.x.x:1874 (IP 地址会自动检测)
 
-<!-- 
-### 方式二：通过 npm 全局安装（暂不可用）
+#### B. 全局模式（任意目录使用）
 
-⚠️ **注意：npm 包版本尚未更新，暂时无法使用 OpenCode 本地模式。**
+创建全局链接，以后可以在任意目录使用 `happy` 命令：
 
-如需使用 OpenCode 本地模式，请使用上方「从源码运行」的方式。
--->
+```bash
+# 创建全局链接（只需执行一次）
+cd packages/happy-cli
+yarn link
+
+# 现在可以在任意目录执行
+happy
+```
+
+> **提示**：全局模式需要先安装 `opencode-ai`：
+> ```bash
+> npm install -g opencode-ai
+> ```
 
 ## 源码开发进阶
 
