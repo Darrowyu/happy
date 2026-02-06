@@ -80,7 +80,15 @@ Press Ctrl+C to stop
 
 ---
 
-### 方式二：通过 npm 全局安装（推荐普通用户）
+### 方式二：通过 npm 全局安装（当前暂不支持 OpenCode 本地模式）
+
+⚠️ **注意：npm 包版本尚未更新，暂时无法使用 OpenCode 本地模式。**
+
+如需使用 OpenCode 本地模式，请使用**方式一：从源码运行**。
+
+---
+
+如需使用传统模式（Claude Code），可按以下步骤：
 
 #### 1. 安装 Happy CLI
 
@@ -88,17 +96,7 @@ Press Ctrl+C to stop
 npm install -g happy-coder
 ```
 
-#### 2. 安装 OpenCode CLI
-
-Happy CLI 依赖 OpenCode CLI 运行，需要单独安装：
-
-```bash
-npm install -g opencode-ai
-```
-
-> **注意**：安装后命令为 `opencode`，但包名为 `opencode-ai`。
-
-#### 3. 启动服务
+#### 2. 启动服务
 
 ```bash
 happy

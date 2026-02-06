@@ -77,19 +77,15 @@ On your computer, run `happy` instead of `claude` or `happy codex` instead of `c
 
 无需连接 Happy Server，直接在本地运行 OpenCode，支持局域网访问。
 
-**从源码运行：**
+**⚠️ 注意：npm 包尚未更新，请使用源码安装体验 OpenCode 本地模式：**
+
 ```bash
 git clone https://github.com/Darrowyu/happy.git
-cd happy/packages/happy-cli
+cd happy
+yarn install
+cd packages/happy-cli
 npx tsx src/index.ts
-# 局域网访问 http://192.168.0.xxx:1874
-```
-
-**从 npm 运行：**
-```bash
-npm install -g happy-coder
-happy
-# 局域网访问 http://192.168.0.xxx:1874
+# 局域网访问 http://192.168.x.xxx:1874
 ```
 
 **特性：**
