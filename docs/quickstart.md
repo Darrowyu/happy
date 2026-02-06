@@ -53,7 +53,7 @@ npm link
 happyoc --version
 
 # 启动服务
-happyoc oc
+happyoc
 ```
 
 启动成功后，控制台会显示：
@@ -99,7 +99,7 @@ npx tsx src/index.ts
 ### 启动 OpenCode 本地模式（推荐）
 
 ```bash
-happyoc oc
+happyoc
 ```
 
 等效于：
@@ -117,7 +117,7 @@ happyoc opencode --local
 ### 指定模型
 
 ```bash
-happyoc oc -m claude-4.5-sonnet
+happyoc -m claude-4.5-sonnet
 ```
 
 ### 查看帮助
