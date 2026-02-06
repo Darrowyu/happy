@@ -77,7 +77,7 @@ cd happy/packages/happy-cli
 npm install
 npm run build
 npm link
-happy oc
+happyoc oc
 # 局域网访问 http://192.168.x.xxx:1874
 ```
 

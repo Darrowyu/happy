@@ -50,10 +50,10 @@ npm unlink -g happy-coder
 npm link
 
 # 验证安装
-happy --version
+happyoc --version
 
 # 启动服务
-happy oc
+happyoc oc
 ```
 
 启动成功后，控制台会显示：
@@ -99,31 +99,31 @@ npx tsx src/index.ts
 ### 启动 OpenCode 本地模式（推荐）
 
 ```bash
-happy oc
+happyoc oc
 ```
 
 等效于：
 
 ```bash
-happy opencode --local
+happyoc opencode --local
 ```
 
 ### 显式启动 OpenCode 本地模式
 
 ```bash
-happy opencode --local
+happyoc opencode --local
 ```
 
 ### 指定模型
 
 ```bash
-happy oc -m claude-4.5-sonnet
+happyoc oc -m claude-4.5-sonnet
 ```
 
 ### 查看帮助
 
 ```bash
-happy --help
+happyoc --help
 ```
 
 ---
