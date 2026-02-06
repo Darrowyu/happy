@@ -51,6 +51,7 @@ Press Ctrl+C to stop
 ```
 
 **访问地址：**
+
 - **本机访问**: http://localhost:1874
 - **局域网访问**: http://192.168.x.x:1874 (IP 地址会自动检测)
 
@@ -95,6 +96,7 @@ happy
 ```
 
 等效于：
+
 ```bash
 happy opencode --local
 ```
@@ -108,7 +110,7 @@ happy opencode --local
 ### 指定模型
 
 ```bash
-happy opencode --local -m claude-3.5-sonnet
+happy opencode --local -m claude-4.5-sonnet
 ```
 
 ### 查看帮助
@@ -180,12 +182,14 @@ ifconfig
 ## 技术细节
 
 - **本地模式特点**:
+  
   - 无需 Happy Server 连接
   - 无需登录认证
   - 不启动后台 daemon 服务
   - 支持局域网内多设备访问
 
 - **启动流程**:
+  
   1. 检查 OpenCode 是否已安装
   2. 启动 OpenCode Web 服务器（绑定 0.0.0.0:1874）
   3. 自动检测并显示局域网 IP 地址
@@ -195,15 +199,16 @@ ifconfig
 
 ## 相关文件
 
-| 文件路径 | 说明 |
-|---------|------|
-| `packages/happy-cli/src/opencode/runOpencode.ts` | 本地模式主逻辑 |
+| 文件路径                                               | 说明            |
+| -------------------------------------------------- | ------------- |
+| `packages/happy-cli/src/opencode/runOpencode.ts`   | 本地模式主逻辑       |
 | `packages/happy-cli/src/opencode/opencodeLocal.ts` | OpenCode 进程管理 |
-| `packages/happy-cli/src/index.ts` | CLI 入口和命令解析 |
+| `packages/happy-cli/src/index.ts`                  | CLI 入口和命令解析   |
 
 ---
 
 更多文档请参考：
+
 - [CLI 架构](./cli-architecture.md)
 - [协议文档](./protocol.md)
 - [项目 README](../README.md)
